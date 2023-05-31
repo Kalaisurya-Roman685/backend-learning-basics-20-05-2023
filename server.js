@@ -14,7 +14,7 @@ app.use(express.json());
 
 // api sections
 
-app.use("/kalai",router);
+app.use("/kalai", router);
 app.listen(8902, () => {
     console.log("Port Running..")
 })
