@@ -1,3 +1,4 @@
+import Shop_schema from "../../shopbike/shopschema/Shop_schema.js";
 import Bikearea_shema from "../models/Bikearea_shema.js";
 
 
@@ -113,3 +114,22 @@ export const BikeAreaAllfinduser = async (req, res) => {
         res.status(404).json("Bike Area Create Error")
     }
 }
+
+
+export const AggregateAllusers = async (req, res) => {
+    try {
+
+
+        const firstMatch = await Bikearea_shema.aggregate([{ $match: { userId: req.body.userId } }]);
+        const secondMatch = await Shop_schema.aggregate([{ $match: { userId: req.body.userId } }]);
+
+
+        console.log(firstMatch, "kalaifirst")
+
+        res.status(201).json({ first: firstMatch, second: secondMatch });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
